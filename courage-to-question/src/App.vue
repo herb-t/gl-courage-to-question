@@ -1,19 +1,15 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/ctq-hero.jpg"> -->
     <Main headline="Courage to Question"/>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import Main from './components/Main.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
     Main,
   }
 }
@@ -41,10 +37,10 @@ body {
 }
 
 h1 {
-  font-size: 28px;
-  font-weight: 300;
+  font-size: 24px;
+  font-weight: 400;
   letter-spacing: initial;
-  line-height: 36px;
+  line-height: 32px;
   text-align: center;
   margin: 0 0 54px 0;
 }
@@ -68,12 +64,21 @@ footer {
   padding-top: 100px;
 }
 
+@media (min-width: 600px) {
+  h1 {
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -.25px;
+    line-height: 40px;
+  }
+}
+
 @media (min-width: 1024px) {
   h1 {
-    font-size: 48px;
-    font-weight: 300;
-    letter-spacing: -.5px;
-    line-height: 56px;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -.25px;
+    line-height: 44px;
   }
 
   p {

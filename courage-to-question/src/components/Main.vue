@@ -4,11 +4,10 @@
       <div class="ctq__section-content">
         <div class="ctq__hero">
           <picture class="ctq__hero-picture">
-            <source media="(max-width: 799px)" srcset="../assets/ctq-hero-m.jpeg">
-            <source media="(min-width: 800px)" srcset="../assets/ctq-hero.jpg">
-            <img src="../assets/ctq-hero.jpg" class="ctq__hero-background" alt="">
+            <source media="(max-width: 799px)" srcset="../assets/ctq-hero-mobile.png">
+            <source media="(min-width: 800px)" srcset="../assets/ctq-hero-desktop.png">
+            <img src="../assets/ctq-hero-desktop.png" class="ctq__hero-background" alt="">
           </picture>
-          <img class="ctq__hero-headline" alt="" src="../assets/ctq-headline.png">
         </div>
       </div>
     </section>
@@ -127,7 +126,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 .ctq__section {
@@ -145,11 +143,11 @@ export default {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 24px;
 }
 
 .ctq__row--sml {
-  padding: 0 5%;
+  padding: 0 32px;
 }
 
 .ctq__video {
@@ -164,14 +162,6 @@ export default {
 .ctq__video:active {
   border: 0;
   outline: 0;
-}
-
-.ctq__hero-headline {
-  max-width: 200px;
-  position: absolute;
-  left: 50%;
-  top: 70%;
-  transform: translate(-50%, -50%);
 }
 
 .border--top {
