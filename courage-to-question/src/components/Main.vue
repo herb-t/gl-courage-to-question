@@ -1,6 +1,100 @@
+<style scoped>
+
+  .ctq__section {
+    box-sizing: border-box;
+    margin-bottom: 120px;
+  }
+
+  .ctq__section--grey {
+    background-color: #f7f7f7;
+    padding: 100px 0;
+  }
+
+  .ctq__section--hero {
+    background-image: linear-gradient(#ffbabf, #fbdfc9);
+  }
+
+  .ctq__row {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .ctq__row--sml {
+    padding: 0 32px;
+  }
+
+  .ctq__hero {
+    min-height: 100vh;
+    opacity: 0;
+    transition: opacity .4s ease-out;
+  }
+
+  .ctq__video {
+    box-shadow: 0 47px 80px -30px rgba(44, 43, 43, .75);
+  }
+
+  .ctq__video--stories {
+    box-shadow: none;
+  }
+
+  .ctq__video:focus,
+  .ctq__video:active {
+    border: 0;
+    outline: 0;
+  }
+
+  .border--top {
+    transform: rotate(180deg);
+  }
+
+  .ctq-images-loaded {
+    opacity: 1;
+  }
+
+  @media (min-width: 600px) {
+    .ctq__section {
+      margin-bottom: 200px;
+    }
+
+    .ctq__section--grey {
+      padding: 200px 0;
+    }
+
+    .ctq__row {
+      padding: 0 40px;
+    }
+
+    .ctq__row--sml {
+      padding: 0 calc(40px + 10%);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ctq__section {
+      margin-bottom: 200px;
+    }
+
+    .ctq__section--grey {
+      padding: 200px 0;
+    }
+
+    .ctq__row {
+      padding: 0 72px;
+    }
+
+    .ctq__row--sml {
+      padding: 0 calc(72px + 10%);
+    }
+  }
+
+</style>
+
 <template>
   <main class="ctq">
-    <section class="ctq__section">
+    <section class="ctq__section ctq__section--hero">
       <div class="ctq__section-content">
         <div class="ctq__hero">
           <picture class="ctq__hero-picture">
@@ -107,6 +201,33 @@ export default {
     videos.forEach(video => {
       observer.observe(video);
     });
+
+    var isFunction = isFunction || function(functionToCheck) {
+      var getType = {};
+      return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
+    }
+
+    function imagesAreLoaded() {
+      document.querySelector('.ctq__hero').classList.add('ctq-images-loaded');
+    }
+
+    var LoadImages = LoadImages || function(a, d, z) {
+      a instanceof Array || (a = [a]);
+      for (var e = a.length, f = 0, g = e; g--;) {
+        var b = document.createElement("img");
+        b.onload = function() {
+          f++; 
+          f >= e && isFunction(d) && d(z)
+        };
+        b.src = a[g]; 
+      }
+    }
+
+    LoadImages([
+      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-desktop.png', 
+      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
+    ], imagesAreLoaded);
+
   },
   methods: {
     playVideo: function(video) {
@@ -125,70 +246,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-.ctq__section {
-  box-sizing: border-box;
-  margin-bottom: 120px;
-}
-
-.ctq__section--grey {
-  background-color: #f7f7f7;
-  padding: 100px 0;
-}
-
-.ctq__row {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.ctq__row--sml {
-  padding: 0 32px;
-}
-
-.ctq__video {
-  box-shadow: 0 47px 80px -30px rgba(44, 43, 43, .75);
-}
-
-.ctq__video--stories {
-  box-shadow: none;
-}
-
-.ctq__video:focus,
-.ctq__video:active {
-  border: 0;
-  outline: 0;
-}
-
-.border--top {
-  transform: rotate(180deg);
-}
-
-@media (min-width: 1024px) {
-  .ctq__section {
-    margin-bottom: 200px;
-  }
-
-  .ctq__section--grey {
-    padding: 200px 0;
-  }
-
-  .ctq__row {
-    padding: 0 72px;
-  }
-
-  .ctq__row--sml {
-    padding: 0 calc(72px + 10%);
-  }
-
-  .ctq__hero-headline {
-    max-width: 280px;
-    top: 85%;
-  }
-}
-
-</style>
