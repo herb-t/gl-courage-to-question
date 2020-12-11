@@ -89,10 +89,6 @@
     .ctq__row {
       padding: 0 72px;
     }
-/* 
-    .ctq__row--sml {
-      padding: 0 calc(72px + 10%);
-    } */
   }
 
 </style>
@@ -184,6 +180,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Main',
   props: {
@@ -207,16 +204,23 @@ export default {
       observer.observe(video);
     });
 
-    var isFunction = isFunction || function(functionToCheck) {
-      var getType = {};
-      return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
-    }
-
     function imagesAreLoaded() {
       document.querySelector('.ctq__hero').classList.add('ctq-images-loaded');
     }
 
-    var LoadImages = LoadImages || function(a, d, z) {
+    this.loadImages([
+      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-desktop.png', 
+      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
+    ], imagesAreLoaded);
+
+  },
+  methods: {
+    loadImages: function(a, d, z) {
+      var isFunction = isFunction || function(functionToCheck) {
+        var getType = {};
+        return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
+      }
+
       a instanceof Array || (a = [a]);
       for (var e = a.length, f = 0, g = e; g--;) {
         var b = document.createElement("img");
@@ -227,12 +231,7 @@ export default {
         b.src = a[g]; 
       }
     }
-
-    LoadImages([
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-desktop.png', 
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
-    ], imagesAreLoaded);
-
   },
 }
+
 </script>

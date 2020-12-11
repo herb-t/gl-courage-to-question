@@ -49,7 +49,7 @@ p {
   font-size: 18px;
   line-height: 1.75;
   letter-spacing: 0;
-  margin: 0 0 24px 0;
+  margin: 0 0 36px 0;
 }
 
 img,
