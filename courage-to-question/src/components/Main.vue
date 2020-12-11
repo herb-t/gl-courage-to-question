@@ -23,6 +23,7 @@
   }
 
   .ctq__row--sml {
+    max-width: 1280px;
     padding: 0 32px;
   }
 
@@ -34,6 +35,10 @@
 
   .ctq__video {
     box-shadow: 0 47px 80px -30px rgba(44, 43, 43, .75);
+  }
+
+    .ctq__video--website {
+    box-shadow: 0 47px 80px -30px rgba(44,43,43,.23);
   }
 
   .ctq__video--stories {
@@ -84,10 +89,10 @@
     .ctq__row {
       padding: 0 72px;
     }
-
+/* 
     .ctq__row--sml {
       padding: 0 calc(72px + 10%);
-    }
+    } */
   }
 
 </style>
@@ -111,7 +116,7 @@
         <div class="ctq__row ctq__row--lrg">
           <div class="ctq__video">
             <video id="video_subhero" class="ctq__video-player ctq__video-player--ui" autoplay playsinline controls muted>
-              <source src="https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-video-case-study_ff.mp4" type="video/mp4">
+              <source src="../assets/videos/ctq-video-case-study_ff.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -137,7 +142,7 @@
       <div class="ctq__section-content">
         <div class="ctq__video">
           <video id="video_fullsize" class="ctq__video-player ctq__video-player--autoplay" autoplay loop playsinline muted>
-            <source src="https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-video-showcase_ff.mp4" type="video/mp4">
+            <source src="../assets/videos/ctq-video-showcase_ff.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -151,7 +156,7 @@
         <div class="ctq__row ctq__row--lrg">
           <div class="ctq__video ctq__video--stories">
             <video id="video_animations" class="ctq__video-player ctq__video-player--ui" autoplay playsinline controls muted>
-              <source src="https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-video-animations_ff.mp4" type="video/mp4">
+              <source src="../assets/videos/ctq-video-animations_ff.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -164,9 +169,9 @@
           <div class="ctq__section-title">
             <h1>WEBSITE</h1>
           </div>
-          <div class="ctq__video">
+          <div class="ctq__video ctq__video--website">
             <video id="video_website" class="ctq__video-player ctq__video-player--autoplay" autoplay loop playsinline muted>
-              <source src="https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-video-site-mock.mp4_ff.mp4" type="video/mp4">
+              <source src="../assets/videos/ctq-video-site-mock.mp4_ff.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -193,7 +198,7 @@ export default {
         if (!entry.isIntersecting) {
           video.pause();
         } else {
-          this.playVideo(video);
+          video.play();
         }
       });
     });
@@ -228,21 +233,6 @@ export default {
       'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
     ], imagesAreLoaded);
 
-  },
-  methods: {
-    playVideo: function(video) {
-      const promise = video.play();
-
-      if (promise !== undefined) {
-        promise.then(() => {
-          video.setAttribute('controls', true);
-        }).catch(() => {
-          video.setAttribute('controls', true);
-        });
-      }
-
-      return promise;
-    },
   },
 }
 </script>
