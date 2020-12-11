@@ -23,12 +23,11 @@
   }
 
   .ctq__row--sml {
-    max-width: 1280px;
     padding: 0 32px;
   }
 
   .ctq__hero {
-    min-height: 100vh;
+    min-height: 80vh;
     opacity: 0;
     transition: opacity .4s ease-out;
   }
@@ -73,7 +72,7 @@
     }
 
     .ctq__row--sml {
-      padding: 0 calc(40px + 10%);
+      padding: 0 calc(40px + 5%);
     }
   }
 
@@ -87,6 +86,21 @@
     }
 
     .ctq__row {
+      padding: 0 72px;
+    }
+
+    .ctq__row--sml {
+      padding: 0 calc(72px + 10%);
+    }
+
+    .ctq__hero {
+      min-height: 100vh;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .ctq__row--sml {
+      max-width: 1280px;
       padding: 0 72px;
     }
   }

@@ -1,21 +1,5 @@
-<template>
-  <div id="app">
-    <Main headline="Courage to Question"/>
-  </div>
-</template>
-
-<script>
-import Main from './components/Main.vue'
-
-export default {
-  name: 'App',
-  components: {
-    Main,
-  }
-}
-</script>
-
 <style>
+
 body,
 html {
   width: 100%;
@@ -50,6 +34,10 @@ p {
   line-height: 1.75;
   letter-spacing: 0;
   margin: 0 0 36px 0;
+}
+
+* > p:last-child {
+  margin-bottom: 0;
 }
 
 img,
@@ -88,3 +76,20 @@ footer {
 }
 
 </style>
+
+<template>
+  <div id="app">
+    <Main headline="Courage to Question"/>
+  </div>
+</template>
+
+<script>
+import Main from './components/Main.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Main,
+  }
+}
+</script>

@@ -1,8 +1,7 @@
-# Courage To Question award submission site
+# Courage To Question videos site
 
 ## Project setup
 ```
-cd courage-to-question
 npm install
 ```
 
@@ -20,6 +19,12 @@ npm run build
 ```
 npm run lint
 ```
+
+### Deploy with firebase
+```
+firebase deploy
+```
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
