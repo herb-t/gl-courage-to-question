@@ -105,6 +105,18 @@
     }
   }
 
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .ctq__hero {
+      min-height: 625px;
+    } 
+  }
+
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+    .ctq__hero {
+      min-height: 790px;
+    } 
+  }
+
 </style>
 
 <template>
