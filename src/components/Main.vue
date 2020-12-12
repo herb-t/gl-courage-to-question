@@ -27,9 +27,19 @@
   }
 
   .ctq__hero {
-    min-height: 80vh;
+    height: 0;
     opacity: 0;
+    padding-bottom: 178%;
+    position: relative;
     transition: opacity .4s ease-out;
+  }
+
+  .ctq__hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .ctq__video {
@@ -76,6 +86,12 @@
     }
   }
 
+  @media (min-width: 800px) {
+    .ctq__hero {
+      padding-bottom: 77%;
+    }
+  }
+
   @media (min-width: 1024px) {
     .ctq__section {
       margin-bottom: 200px;
@@ -92,10 +108,6 @@
     .ctq__row--sml {
       padding: 0 calc(72px + 10%);
     }
-
-    .ctq__hero {
-      min-height: 100vh;
-    }
   }
 
   @media (min-width: 1440px) {
@@ -107,13 +119,13 @@
 
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
     .ctq__hero {
-      min-height: 625px;
+      max-height: 625px;
     } 
   }
 
   @media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
     .ctq__hero {
-      min-height: 790px;
+      max-height: 790px;
     } 
   }
 
@@ -123,12 +135,14 @@
   <main class="ctq">
     <section class="ctq__section ctq__section--hero">
       <div class="ctq__section-content">
-        <div class="ctq__hero">
-          <picture class="ctq__hero-picture">
-            <source media="(max-width: 799px)" srcset="../assets/ctq-hero-mobile.png">
-            <source media="(min-width: 800px)" srcset="../assets/ctq-hero-desktop.png">
-            <img src="../assets/ctq-hero-desktop.png" class="ctq__hero-background" alt="">
-          </picture>
+        <div class="ctq__hero">        
+          <div class="ctq__hero-image">
+            <picture class="ctq__hero-picture">
+              <source media="(max-width: 799px)" srcset="../assets/ctq-hero-mobile.png">
+              <source media="(min-width: 800px)" srcset="../assets/ctq-hero-desktop.png">
+              <img src="../assets/ctq-hero-desktop.png" class="ctq__hero-background" alt="">
+            </picture>
+          </div>
         </div>
       </div>
     </section>
