@@ -1,4 +1,4 @@
-<style scoped>
+<style>
 
   .ctq__section {
     box-sizing: border-box;
@@ -26,27 +26,11 @@
     padding: 0 32px;
   }
 
-  .ctq__hero {
-    height: 0;
-    opacity: 0;
-    padding-bottom: 178%;
-    position: relative;
-    transition: opacity .4s ease-out;
-  }
-
-  .ctq__hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
   .ctq__video {
     box-shadow: 0 47px 80px -30px rgba(44, 43, 43, .75);
   }
 
-    .ctq__video--website {
+  .ctq__video--website {
     box-shadow: 0 47px 80px -30px rgba(44,43,43,.23);
   }
 
@@ -69,13 +53,6 @@
   }
 
   @media (min-width: 600px) {
-    .ctq__section {
-      margin-bottom: 200px;
-    }
-
-    .ctq__section--grey {
-      padding: 200px 0;
-    }
 
     .ctq__row {
       padding: 0 40px;
@@ -83,12 +60,6 @@
 
     .ctq__row--sml {
       padding: 0 calc(40px + 5%);
-    }
-  }
-
-  @media (min-width: 800px) {
-    .ctq__hero {
-      padding-bottom: 77%;
     }
   }
 
@@ -117,35 +88,12 @@
     }
   }
 
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-    .ctq__hero {
-      max-height: 625px;
-    } 
-  }
-
-  @media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
-    .ctq__hero {
-      max-height: 790px;
-    } 
-  }
-
 </style>
 
 <template>
   <main class="ctq">
-    <section class="ctq__section ctq__section--hero">
-      <div class="ctq__section-content">
-        <div class="ctq__hero">        
-          <div class="ctq__hero-image">
-            <picture class="ctq__hero-picture">
-              <source media="(max-width: 799px)" srcset="../assets/ctq-hero-mobile.png">
-              <source media="(min-width: 800px)" srcset="../assets/ctq-hero-desktop.png">
-              <img src="../assets/ctq-hero-desktop.png" class="ctq__hero-background" alt="">
-            </picture>
-          </div>
-        </div>
-      </div>
-    </section>
+
+    <ctq_hero></ctq_hero>
 
     <section class="ctq__section">
       <div class="ctq__section-content">
@@ -221,8 +169,13 @@
 
 <script>
 
+import Hero from './Hero.vue'
+
 export default {
   name: 'Main',
+  components: {
+    ctq_hero: Hero,
+	},
   props: {
     headline: String
   },
