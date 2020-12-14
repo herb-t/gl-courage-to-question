@@ -21,6 +21,14 @@
     height: 100%;
   }
 
+  .ctq__hero-headline {
+    max-width: 200px;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+  }
+
   .ctq-images-loaded {
     opacity: 1;
   }
@@ -28,6 +36,11 @@
   @media (min-width: 800px) {
     .ctq__hero {
       padding-bottom: 77%;
+    }
+
+    .ctq__hero-headline {
+      max-width: 280px;
+      top: 65%;
     }
   }
 
@@ -58,10 +71,15 @@
       <div class="ctq__hero">        
         <div class="ctq__hero-image">
           <picture class="ctq__hero-picture">
-            <source media="(max-width: 799px)" srcset="../assets/ctq-hero-mobile.png">
+            <!-- <source media="(max-width: 799px)" srcset="../assets/ctq-hero-mobile.png">
             <source media="(min-width: 800px)" srcset="../assets/ctq-hero-desktop.png">
-            <img src="../assets/ctq-hero-desktop.png" class="ctq__hero-background" alt="">
+            <img src="../assets/ctq-hero-desktop.png" class="ctq__hero-background" alt=""> -->
+            <source media="(max-width: 799px)" srcset="../assets/ctq-hero-m.jpeg">
+            <source media="(min-width: 800px)" srcset="../assets/ctq-hero.jpg">
+            <img src="../assets/ctq-hero.jpg" class="ctq__hero-background" alt="">
           </picture>
+
+          <img class="ctq__hero-headline" alt="" src="../assets/ctq-headline.png">
         </div>
       </div>
     </div>
@@ -83,9 +101,19 @@ export default {
 
     function imagesAreLoaded() {
       document.querySelector('.ctq__hero').classList.add('ctq-images-loaded');
-      // this.init();
-      const tl = gsap.timeline({scrollTrigger:{
-          trigger: ".ctq__hero",
+      this.init();
+    }
+
+    this.loadImages([
+      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-desktop.png', 
+      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
+    ], imagesAreLoaded.bind(this));
+
+  },
+  methods: {
+    init: function() {
+      var tl = gsap.timeline({scrollTrigger:{
+          trigger:".ctq__hero",
           scrub: true,
           pin: false,
           start:"top top",
@@ -95,33 +123,12 @@ export default {
 
       tl.to('.ctq__hero-image', {
         y: 150,
-        duration: 6
-      })
-    }
-
-    this.loadImages([
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-desktop.png', 
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
-    ], imagesAreLoaded);
-
-  },
-  methods: {
-    init: function() {
-      const tl = gsap.timeline({scrollTrigger:{
-          trigger:".ctq__hero-image",
-          scrub: true,
-          pin: false,
-          start:"top top",
-          end: "+=100%",
-          markers: true
-      }});
-
-      tl.to('.ctq__hero-picture', {
-        y: -700,
-        duration: 6
-      })
-
-      return tl;
+        duration: 6,
+      });
+      tl.to('.ctq__hero-headline', {
+        y: -75,
+        duration: 6,
+      }, '-=6');
     },
     loadImages: function(a, d, z) {
       var isFunction = isFunction || function(functionToCheck) {
