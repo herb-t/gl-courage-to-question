@@ -95,7 +95,7 @@
 
     <ctq_hero></ctq_hero>
 
-    <section class="ctq__section">
+    <section class="ctq__section ctq__section--showcase">
       <div class="ctq__section-content">
         <div class="ctq__row ctq__row--lrg">
           <div class="ctq__video">
@@ -169,7 +169,7 @@
 
 <script>
 
-import Hero from './Hero.vue'
+import Hero from './Hero.vue';
 
 export default {
   name: 'Main',
@@ -197,33 +197,6 @@ export default {
       observer.observe(video);
     });
 
-    function imagesAreLoaded() {
-      document.querySelector('.ctq__hero').classList.add('ctq-images-loaded');
-    }
-
-    this.loadImages([
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-desktop.png', 
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
-    ], imagesAreLoaded);
-
-  },
-  methods: {
-    loadImages: function(a, d, z) {
-      var isFunction = isFunction || function(functionToCheck) {
-        var getType = {};
-        return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
-      }
-
-      a instanceof Array || (a = [a]);
-      for (var e = a.length, f = 0, g = e; g--;) {
-        var b = document.createElement("img");
-        b.onload = function() {
-          f++; 
-          f >= e && isFunction(d) && d(z)
-        };
-        b.src = a[g]; 
-      }
-    }
   },
 }
 

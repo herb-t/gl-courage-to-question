@@ -114,6 +114,7 @@
 
 <script>
 
+import Bowser from "bowser";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -142,6 +143,9 @@ export default {
     }
   },
   mounted: function() {
+    const browser = Bowser.getParser(window.navigator.userAgent);
+    const platform = browser.getPlatformType();
+    const isMobile = platform === 'mobile' || platform === 'tablet';
 
     function imagesAreLoaded() {
       gsap.to(".ctq__hero", {
@@ -153,20 +157,21 @@ export default {
     }
 
     this.loadImages(
-        // isMobile ? this.mobile : this.desktop,
-        this.desktop,
+        isMobile ? this.mobile : this.desktop,
         imagesAreLoaded.bind(this));
 
   },
   methods: {
     init: function() {
-      var tl = gsap.timeline({scrollTrigger:{
+      var tl = gsap.timeline({
+        defaults: { ease: "none", transformOrigin: "50% 50%" },
+        scrollTrigger:{
           trigger:".ctq__hero",
-          scrub: true,
+          scrub: .6,
           pin: false,
           start:"top top",
-          end: "+=100%",
-          markers: false
+          end: "bottom +=100px",
+          markers: true
       }});
 
       tl.to('.ctq__hero-layer--phone', {
@@ -186,7 +191,7 @@ export default {
         duration: 6,
       }, '-=6');
       tl.to('.ctq__hero-layer--headline', {
-        y: -75,
+        y: 75,
         duration: 6,
       }, '-=6');
 
@@ -206,13 +211,6 @@ export default {
         };
         b.src = a[g]; 
       }
-    },
-    isMobile: function() {
-      // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      //   console.log ('is mobile')
-      // } else {
-      //   console.log('is desktop')
-      // }
     }
   },
 }
