@@ -13,7 +13,8 @@
     transition: opacity .4s ease-out;
   }
 
-  .ctq__hero-image {
+  .ctq__hero-image,
+  .ctq__hero-layer {
     position: absolute;
     top: 0;
     left: 0;
@@ -21,33 +22,29 @@
     height: 100%;
   }
 
-  .ctq__hero-headline {
-    max-width: 200px;
-    position: absolute;
-    left: 50%;
-    top: 70%;
-    transform: translate(-50%, -50%);
+  .ctq__hero-layer--phone {
+    z-index: 1;
   }
 
-  .ctq-images-loaded {
-    opacity: 1;
+  .ctq__hero-layer--back {
+    z-index: 5;
+  }
+
+  .ctq__hero-layer--front {
+    z-index: 10;
+  }
+
+  .ctq__hero-layer--clouds {
+    z-index: 15;
+  }
+
+  .ctq__hero-layer--headline {
+    z-index: 20;
   }
 
   @media (min-width: 800px) {
     .ctq__hero {
       padding-bottom: 77%;
-    }
-
-    .ctq__hero-headline {
-      max-width: 280px;
-      top: 65%;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    .ctq__row--sml {
-      max-width: 1280px;
-      padding: 0 72px;
     }
   }
 
@@ -69,18 +66,47 @@
   <section class="ctq__section ctq__section--hero">
     <div class="ctq__section-content">
       <div class="ctq__hero">        
-        <div class="ctq__hero-image">
-          <picture class="ctq__hero-picture">
-            <!-- <source media="(max-width: 799px)" srcset="../assets/ctq-hero-mobile.png">
-            <source media="(min-width: 800px)" srcset="../assets/ctq-hero-desktop.png">
-            <img src="../assets/ctq-hero-desktop.png" class="ctq__hero-background" alt=""> -->
-            <source media="(max-width: 799px)" srcset="../assets/ctq-hero-m.jpeg">
-            <source media="(min-width: 800px)" srcset="../assets/ctq-hero.jpg">
-            <img src="../assets/ctq-hero.jpg" class="ctq__hero-background" alt="">
-          </picture>
 
-          <img class="ctq__hero-headline" alt="" src="../assets/ctq-headline.png">
+        <div class="ctq__hero-layer ctq__hero-layer--phone">
+          <picture class="ctq__hero-picture">
+            <source media="(max-width: 799px)" srcset="../assets/mobile-phone.png">
+            <source media="(min-width: 800px)" srcset="../assets/desktop-phone.png">
+            <img src="../assets/desktop-phone.png" class="ctq__hero-layer-image" alt="" role="presentation">
+          </picture>
         </div>
+
+        <div class="ctq__hero-layer ctq__hero-layer--front">
+          <picture class="ctq__hero-picture">
+            <source media="(max-width: 799px)" srcset="../assets/mobile-front.png">
+            <source media="(min-width: 800px)" srcset="../assets/desktop-front.png">
+            <img src="../assets/desktop-front.png" class="ctq__hero-layer-image" alt="" role="presentation">
+          </picture>
+        </div>
+
+        <div class="ctq__hero-layer ctq__hero-layer--back">
+          <picture class="ctq__hero-picture">
+            <source media="(max-width: 799px)" srcset="../assets/mobile-back.png">
+            <source media="(min-width: 800px)" srcset="../assets/desktop-back.png">
+            <img src="../assets/desktop-back.png" class="ctq__hero-layer-image" alt="" role="presentation">
+          </picture>
+        </div>
+
+        <div class="ctq__hero-layer ctq__hero-layer--clouds">
+          <picture class="ctq__hero-picture">
+            <source media="(max-width: 799px)" srcset="../assets/mobile-clouds.png">
+            <source media="(min-width: 800px)" srcset="../assets/desktop-clouds.png">
+            <img src="../assets/desktop-clouds.png" class="ctq__hero-layer-image" alt="" role="presentation">
+          </picture>
+        </div>
+
+        <div class="ctq__hero-layer ctq__hero-layer--headline">
+          <picture class="ctq__hero-picture">
+            <source media="(max-width: 799px)" srcset="../assets/mobile-headline.png">
+            <source media="(min-width: 800px)" srcset="../assets/desktop-headline.png">
+            <img src="../assets/desktop-headline.png" class="ctq__hero-layer-image" alt="" role="presentation">
+          </picture>
+        </div>
+
       </div>
     </div>
   </section>
@@ -97,17 +123,39 @@ export default {
   props: {
     title: String
   },
+  data () {
+    return {
+      mobile: [
+        '/images/mobile-phone.png', 
+        '/images/mobile-back.png',
+        '/images/mobile-front.png', 
+        '/images/mobile-clouds.png',
+        '/images/mobile-headline.png'
+      ],
+      desktop: [
+        '/images/desktop-phone.png', 
+        '/images/desktop-back.png',
+        '/images/desktop-front.png', 
+        '/images/desktop-clouds.png',
+        '/images/desktop-headline.png'
+      ]
+    }
+  },
   mounted: function() {
 
     function imagesAreLoaded() {
-      document.querySelector('.ctq__hero').classList.add('ctq-images-loaded');
+      gsap.to(".ctq__hero", {
+        autoAlpha: 1,
+        ease: "Power4.easeOut",
+        duration: .4
+      });
       this.init();
     }
 
-    this.loadImages([
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-desktop.png', 
-      'https://storage.googleapis.com/hook-2017.appspot.com/projects/courage-to-question/ctq-hero-mobile.png'
-    ], imagesAreLoaded.bind(this));
+    this.loadImages(
+        // isMobile ? this.mobile : this.desktop,
+        this.desktop,
+        imagesAreLoaded.bind(this));
 
   },
   methods: {
@@ -121,14 +169,27 @@ export default {
           markers: false
       }});
 
-      tl.to('.ctq__hero-image', {
-        y: 150,
+      tl.to('.ctq__hero-layer--phone', {
+        y: 200,
         duration: 6,
       });
-      tl.to('.ctq__hero-headline', {
+      tl.to('.ctq__hero-layer--back', {
+        y: 150,
+        duration: 6,
+      }, '-=6');
+      tl.to('.ctq__hero-layer--front', {
+        y: 100,
+        duration: 6,
+      }, '-=6');
+      tl.to('.ctq__hero-layer--clouds', {
+        y: 50,
+        duration: 6,
+      }, '-=6');
+      tl.to('.ctq__hero-layer--headline', {
         y: -75,
         duration: 6,
       }, '-=6');
+
     },
     loadImages: function(a, d, z) {
       var isFunction = isFunction || function(functionToCheck) {
@@ -145,6 +206,13 @@ export default {
         };
         b.src = a[g]; 
       }
+    },
+    isMobile: function() {
+      // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      //   console.log ('is mobile')
+      // } else {
+      //   console.log('is desktop')
+      // }
     }
   },
 }
