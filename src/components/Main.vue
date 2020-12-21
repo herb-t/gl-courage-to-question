@@ -10,8 +10,10 @@
     padding: 100px 0;
   }
 
-  .ctq__section--hero {
-    background-image: linear-gradient(#ffbabf, #fbdfc9);
+  .ctq__section--showcase {
+    background-color: #fff;
+    position: relative;
+    z-index: 10;
   }
 
   .ctq__row {

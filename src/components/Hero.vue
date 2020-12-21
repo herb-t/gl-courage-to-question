@@ -3,11 +3,14 @@
   .ctq__section--hero {
     background-image: linear-gradient(#ffbabf, #fbdfc9);
     overflow: hidden;
+    position: relative;
+    z-index: 5;
   }
 
   .ctq__hero {
     height: 0;
     opacity: 0;
+    overflow: hidden;
     padding-bottom: 178%;
     position: relative;
     transition: opacity .4s ease-out;
@@ -16,7 +19,6 @@
   .ctq__hero-image,
   .ctq__hero-layer {
     position: absolute;
-    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -151,7 +153,12 @@ export default {
       gsap.to(".ctq__hero", {
         autoAlpha: 1,
         ease: "Power4.easeOut",
-        duration: .4
+        duration: .4,
+        onComplete: function() {
+          gsap.set('.ctq__section--hero', {
+            background: '#fff',
+          })
+        }
       });
       this.init();
     }
@@ -163,38 +170,43 @@ export default {
   },
   methods: {
     init: function() {
-      var tl = gsap.timeline({
-        defaults: { ease: "none", transformOrigin: "50% 50%" },
+      const hero = document.querySelector('.ctq__hero');
+      const phone = document.querySelector('.ctq__hero-layer--phone');
+      const back = document.querySelector('.ctq__hero-layer--back');
+      const front = document.querySelector('.ctq__hero-layer--front');
+      const clouds = document.querySelector('.ctq__hero-layer--clouds');
+      const headline = document.querySelector('.ctq__hero-layer--headline');
+
+      const tl = gsap.timeline({
         scrollTrigger:{
-          trigger:".ctq__hero",
-          scrub: .6,
+          trigger: hero,
+          scrub: true,
           pin: false,
-          start:"top top",
-          end: "bottom +=100px",
-          markers: true
+          start: 'top top',
+          end: 'bottom top',
+          markers: false
       }});
 
-      tl.to('.ctq__hero-layer--phone', {
-        y: 200,
-        duration: 6,
-      });
-      tl.to('.ctq__hero-layer--back', {
+      tl.to(phone, {
         y: 150,
         duration: 6,
-      }, '-=6');
-      tl.to('.ctq__hero-layer--front', {
+      });
+      tl.to(back, {
         y: 100,
         duration: 6,
       }, '-=6');
-      tl.to('.ctq__hero-layer--clouds', {
+      tl.to(front, {
         y: 50,
         duration: 6,
       }, '-=6');
-      tl.to('.ctq__hero-layer--headline', {
-        y: 75,
+      tl.to(clouds, {
+        y: -25,
         duration: 6,
       }, '-=6');
-
+      tl.to(headline, {
+        y: 50,
+        duration: 6,
+      }, '-=6');
     },
     loadImages: function(a, d, z) {
       var isFunction = isFunction || function(functionToCheck) {
