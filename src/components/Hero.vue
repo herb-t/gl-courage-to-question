@@ -154,11 +154,6 @@ export default {
         autoAlpha: 1,
         ease: "Power4.easeOut",
         duration: .4,
-        onComplete: function() {
-          gsap.set('.ctq__section--hero', {
-            background: '#fff',
-          })
-        }
       });
       this.init();
     }
@@ -180,7 +175,7 @@ export default {
       const tl = gsap.timeline({
         scrollTrigger:{
           trigger: hero,
-          scrub: true,
+          scrub: .6,
           pin: false,
           start: 'top top',
           end: 'bottom top',
