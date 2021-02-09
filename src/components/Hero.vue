@@ -129,18 +129,18 @@ export default {
   data () {
     return {
       mobile: [
-        '/images/mobile-phone.png', 
-        '/images/mobile-back.png',
-        '/images/mobile-front.png', 
-        '/images/mobile-clouds.png',
-        '/images/mobile-headline.png'
+        '/ctq-submission/images/mobile-phone.png', 
+        '/ctq-submission/images/mobile-back.png',
+        '/ctq-submission/images/mobile-front.png', 
+        '/ctq-submission/images/mobile-clouds.png',
+        '/ctq-submission/images/mobile-headline.png'
       ],
       desktop: [
-        '/images/desktop-phone.png', 
-        '/images/desktop-back.png',
-        '/images/desktop-front.png', 
-        '/images/desktop-clouds.png',
-        '/images/desktop-headline.png'
+        '/ctq-submission/images/desktop-phone.png', 
+        '/ctq-submission/images/desktop-back.png',
+        '/ctq-submission/images/desktop-front.png', 
+        '/ctq-submission/images/desktop-clouds.png',
+        '/ctq-submission/images/desktop-headline.png'
       ]
     }
   },
